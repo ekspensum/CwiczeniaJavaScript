@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Slider</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
+    <script type="text/javascript" src="slider.js" charset="utf-8"></script>
+    <style>
+        body {
+            background-color: gray;
+            font-size:medium;
+            color:white;
+        }
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: groove;
+            color: white;
+            padding: 4px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body onload="zmienSlajd();">
+    <span onclick="odczytSlajdu(1)" style="cursor:pointer">[ 1 ]</span>
+    <span onclick="odczytSlajdu(2)" style="cursor:pointer">[ 2 ]</span>
+    <span onclick="odczytSlajdu(3)"><button>3</button></span>
+    <span onclick="odczytSlajdu(4)"><button>4</button></span>
+    <span onclick="odczytSlajdu(5)" ><button>5</button></span>
+    <button class="button" id="b1" onclick="odczytNrSlajdu()"><b id="nrSlajdu"></b></button>
+
+
+    <div id="slider"></div>
+
+</body>
+</html>
