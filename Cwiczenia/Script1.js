@@ -32,6 +32,18 @@ function pobierzLiczbe() {
 
 }
 
+function pobierzLiczbeFormularz() {
+    let liczba = document.forms["form1"]["licz1"].value;
+    if (liczba > 0)
+        document.getElementById("l2").innerHTML = "liczba dodatnia";
+    else if (liczba < 0)
+        document.getElementById("l2").innerHTML = "liczba ujemna";
+    else if (liczba == 0)
+        document.getElementById("l2").innerHTML = "zero";
+    else
+        document.getElementById("l2").innerHTML = "to nie jest liczba";
+}
+
 function podajLiczby() {
     var start = new Number(document.getElementById("liczba1").value);
     var end = new Number(end = document.getElementById("liczba2").value);
@@ -47,7 +59,7 @@ function podajLiczby() {
         var tab = [];
         var j = 0;
         for (i = start; i >= end; i--) {
-            tab[j] = " "+i;
+            tab[j] = " " + i;
             j++;
         }
         document.getElementById("zakres").innerHTML = tab.toString();
@@ -57,5 +69,34 @@ function podajLiczby() {
         document.getElementById("zakres").innerHTML = "Jedno z pól lub oba nie zawiera liczby."
 }
 
+var myIrwal;
 
+function setInterwal() {
+    myIrwal = setInterval(interwal, 2000);
+}
 
+var int1 = 15;
+
+function interwal() {
+    int1++;
+    document.getElementById("interwal1").innerHTML = int1;
+    if (int1 == 21)
+        clearInterval(myIrwal);
+}
+
+function czas() {
+    var data = new Date();
+    let godz = data.getHours();
+    let min = data.getMinutes();
+    let sek = data.getSeconds();
+    document.getElementById("czas").innerHTML = godz + ":" + min + ":" + sek;
+}
+
+function pokazCzas() {
+    setInterval(czas, 1000);
+}
+
+function pobierzParametrTekstowy(param) {
+    document.getElementById("parametrTekstowy").innerHTML = param;
+    console.log(param);
+}
