@@ -1,18 +1,23 @@
 ﻿<!DOCTYPE html>
 
 <html lang="pl" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" />
     <title></title>
     <script type="text/javascript" src="Script1.js" charset="utf-8"></script>
 </head>
-<body onload="odlicz();" style="background-color: gray">
+
+<body onload="odlicz(); setInterwal(); pokazCzas();" style="background-color: gray">
     <div id="zegar"></div>
     <br />
-    <form method="post" action="HTMLPage1.html" id="formularz">
+    <p>Pobieranie danych z formularza przez przycisk formularza metodą POST</p>
+    <form name="form1" method="post" action="/cwiczenia.html" id="formularz">
         <input name="licz1" type="text" id="l1" />
+        <input type="submit" value="Ok - formularz" onclick="pobierzLiczbeFormularz()" />
     </form>
-    <button type="submit" onclick="pobierzLiczbe();">OK</button>
+    <p>Pobieranie danych także z formularza lecz przez przycisk typu Button</p>
+    <button type="submit" onclick="pobierzLiczbe();">OK - button</button>
     <br />
     <br />
     <div id="l2"></div>
@@ -23,7 +28,17 @@
 
     <input type="submit" value="OK" onclick="podajLiczby();" />
 
-    <p id="zakres" ></p>
+    <p id="zakres"></p>
+
+    <!-- <button onclick="setInterwal()">OK</button> -->
+    <b>Interwał: </b>
+    <b id="interwal1" style="font-size: 24px"></b>
+
+    <p id="czas" style="font-size: 30px"></p>
+
+    <button onclick="pobierzParametrTekstowy('Jakiś parametr tekstowy')" value="Pobierz">Pobierz parametr tekstowy</button>
+    <div id="parametrTekstowy"></div>
 
 </body>
+
 </html>

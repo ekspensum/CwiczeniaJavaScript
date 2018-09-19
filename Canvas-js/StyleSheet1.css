@@ -1,0 +1,19 @@
+﻿body {
+    background-color: gray;
+}
+
+#can1 {
+    border-style: solid;
+    border-width: medium;
+}
+
+#can2 {
+    border-style: solid;
+    border-width: medium;
+    border-color: blue;
+    width: 400px;
+    height: 300px;
+    position: absolute;
+    top: 100px;
+    left: 1050px;
+}
