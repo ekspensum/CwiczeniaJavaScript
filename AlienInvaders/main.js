@@ -37,14 +37,22 @@ function Alien(x, y, i_val) {
     }
     this.moveAlienDown = function() {
         setInterval(function() {
-            if (y < can.height * 0.5) {
-                y = y + 20;
-                ctx.clearRect(x, y - 20, 80, 50);
+            if (y >= (can.height - 120)) {
+                ctx.textAlign = "center";
+                ctx.font = "35px Arial";
+                ctx.fillStyle = "red";
+                ctx.fillText("Game Over !", can.width / 2, 100);
+                return;
             } else {
-                y = y + 40;
-                ctx.clearRect(x, y - 40, 80, 50);
+                if (y < can.height * 0.5) {
+                    y = y + 10;
+                    ctx.clearRect(x, y - 10, 80, 50);
+                } else {
+                    y = y + 20;
+                    ctx.clearRect(x, y - 20, 80, 50);
+                }
             }
-        }, 1000);
+        }, 300);
     }
 }
 
@@ -64,13 +72,19 @@ function Player(x, y) {
         let k = event.key;
         if (k == "ArrowRight") {
             x = x + 20;
-            tank.clearRect(x - 20, y, 100, 75);
-            tank.drawImage(img, x, y, 100, 75);
+            if (x <= can.width - 105) {
+                tank.clearRect(x - 20, y, 100, 75);
+                tank.drawImage(img, x, y, 100, 75);
+            } else
+                x = can.width - 105;
         }
         if (k == "ArrowLeft") {
             x = x - 20;
-            tank.clearRect(x + 20, y, 100, 75);
-            tank.drawImage(img, x, y, 100, 75);
+            if (x >= 5) {
+                tank.clearRect(x + 20, y, 100, 75);
+                tank.drawImage(img, x, y, 100, 75);
+            } else
+                x = 0;
         }
         let bulletInval;
         if (k == "Control") {
@@ -89,7 +103,6 @@ function Player(x, y) {
                     clearInterval(bulletInval);
                     bullet.clearRect(ballX - 10, ballY - 10, 20, 20);
                 }
-
                 console.log(ballY);
             }, 50)
         }
