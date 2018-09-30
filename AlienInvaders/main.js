@@ -6,16 +6,23 @@ var areaAlien = can.width - 120;
 document.body.appendChild(can);
 var plansza = can.getContext("2d");
 plansza.strokeRect(0, 0, can.width - 5, can.height - 5);
+var alienX = 0;
 
 function Alien(x, y, i_val) {
     let ctx = can.getContext("2d");
-    this.x = x;
-    this.y = y;
+    this.ax = 10;
+    this.ay = 0;
     this.i_val = i_val;
     var img = new Image();
     img.src = "alien.png";
     img.onload = function() {
         ctx.drawImage(img, x, y, 80, 50);
+    }
+    this.alienX = function() {
+        return x;
+    }
+    this.alienY = function() {
+        return y;
     }
     this.moveAlienHor = function() {
         // zmienna i<=50% to ruch w prawo, else ruch w lewo
@@ -33,6 +40,8 @@ function Alien(x, y, i_val) {
             }
             if (i == areaAlien / 5)
                 i = 0;
+            this.alienX = x;
+            this.alienY = y;
         }, i_val);
     }
     this.moveAlienDown = function() {
@@ -55,6 +64,8 @@ function Alien(x, y, i_val) {
         }, 300);
     }
 }
+var bulletX = 0;
+var bulletY = 0;
 
 function Player(x, y) {
     this.x = x;
@@ -63,6 +74,7 @@ function Player(x, y) {
     var bullet = can.getContext("2d");
     var img = new Image();
     img.src = "tank.png";
+
     this.start = function() {
         img.onload = function() {
             tank.drawImage(img, x, y, 100, 75);
@@ -87,10 +99,9 @@ function Player(x, y) {
                 x = 0;
         }
         let bulletInval;
+        let ballY = can.height - 120;
+        let ballX = x + 50;
         if (k == "Control") {
-            console.log(k);
-            let ballY = can.height - 120;
-            let ballX = x + 50;
             bulletInval = setInterval(function() {
                 ballY = ballY - 20;
                 bullet.fillStyle = "red";
@@ -99,11 +110,13 @@ function Player(x, y) {
                 bullet.clearRect(ballX - 10, ballY + 10, 20, 20);
                 bullet.stroke();
                 bullet.fill();
-                if (ballY == 20) {
+                bulletX = ballX;
+                bulletY = ballY;
+                if (ballY <= 20) {
                     clearInterval(bulletInval);
                     bullet.clearRect(ballX - 10, ballY - 10, 20, 20);
                 }
-                console.log(ballY);
+                // console.log(bulletY);
             }, 50)
         }
     }
@@ -119,6 +132,10 @@ function Player(x, y) {
 //     setTimeout("moveAlienDown()", ival)
 // }
 
+function Collision() {
+
+}
+
 var alien1 = new Alien(20, 50, 30);
 var alien2 = new Alien(20, 100, 20);
 var alien3 = new Alien(20, 150, 10);
@@ -133,3 +150,16 @@ var player = new Player(can.width / 2 - 50, can.height - 85);
 player.start();
 document.getElementById("can").addEventListener("keydown", player.moveTank);
 document.onkeydown = player.moveTank;
+
+setInterval(function() {
+
+    console.log("ax1 " + alien1.alienX());
+    console.log("ay1 " + alien1.alienY());
+
+    // console.log("ax2 " + alien2.alienX());
+    // console.log("ax3 " + alien3.alienX());
+
+    console.log("bullet X " + bulletX);
+    console.log("bullet Y " + bulletY);
+
+}, 50)
