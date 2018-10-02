@@ -41,7 +41,7 @@ function Alien(x, y, i_val) {
             if (i == areaAlien / 5)
                 i = 0;
             this.alienX = x;
-            this.alienY = y;
+            // this.alienY = y;
         }, i_val);
     }
     this.moveAlienDown = function() {
@@ -51,21 +51,23 @@ function Alien(x, y, i_val) {
                 ctx.font = "35px Arial";
                 ctx.fillStyle = "red";
                 ctx.fillText("Game Over !", can.width / 2, 100);
+                this.alienY = y;
                 return;
             } else {
                 if (y < can.height * 0.5) {
+                    y = y + 5;
+                    ctx.clearRect(x, y - 5, 80, 50);
+                    this.alienY = y;
+                } else {
                     y = y + 10;
                     ctx.clearRect(x, y - 10, 80, 50);
-                } else {
-                    y = y + 20;
-                    ctx.clearRect(x, y - 20, 80, 50);
+                    this.alienY = y;
                 }
             }
-        }, 300);
+        }, 1500);
     }
 }
-var bulletX = 0;
-var bulletY = 0;
+let counter = 0;
 
 function Player(x, y) {
     this.x = x;
@@ -99,25 +101,45 @@ function Player(x, y) {
                 x = 0;
         }
         let bulletInval;
-        let ballY = can.height - 120;
-        let ballX = x + 50;
+        let bulletY = can.height - 120;
+        let bulletX = x + 50;
+
         if (k == "Control") {
-            bulletInval = setInterval(function() {
-                ballY = ballY - 20;
-                bullet.fillStyle = "red";
-                bullet.beginPath();
-                bullet.arc(ballX, ballY, 9, 0, 2 * Math.PI);
-                bullet.clearRect(ballX - 10, ballY + 10, 20, 20);
-                bullet.stroke();
-                bullet.fill();
-                bulletX = ballX;
-                bulletY = ballY;
-                if (ballY <= 20) {
-                    clearInterval(bulletInval);
-                    bullet.clearRect(ballX - 10, ballY - 10, 20, 20);
-                }
-                // console.log(bulletY);
-            }, 50)
+            counter++;
+            if (counter == 1) {
+                bulletInval = setInterval(function() {
+                    bulletY = bulletY - 5;
+                    bullet.fillStyle = "red";
+                    bullet.beginPath();
+                    bullet.clearRect(bulletX - 10, bulletY, 20, 20);
+                    bullet.arc(bulletX, bulletY, 9, 0, 2 * Math.PI);
+                    bullet.stroke();
+                    bullet.fill();
+                    col.contact(alien1.alienX(), alien1.alienY(), alien2.alienX(), alien2.alienY(), alien3.alienX(), alien3.alienY(), bulletX, bulletY);
+                    if (bulletY <= 20) {
+                        clearInterval(bulletInval);
+                        bullet.clearRect(bulletX - 10, bulletY - 10, 20, 20);
+                    }
+                }, 20);
+            } else if (counter == 2) {
+                setTimeout(function() {
+                    bulletInval = setInterval(function() {
+                        bulletY = bulletY - 5;
+                        bullet.fillStyle = "red";
+                        bullet.beginPath();
+                        bullet.clearRect(bulletX - 10, bulletY, 20, 20);
+                        bullet.arc(bulletX, bulletY, 9, 0, 2 * Math.PI);
+                        bullet.stroke();
+                        bullet.fill();
+                        col.contact(alien1.alienX(), alien1.alienY(), alien2.alienX(), alien2.alienY(), alien3.alienX(), alien3.alienY(), bulletX, bulletY);
+                        if (bulletY <= 20) {
+                            clearInterval(bulletInval);
+                            bullet.clearRect(bulletX - 10, bulletY - 10, 20, 20);
+                        }
+                    }, 20);
+                    counter = 0;
+                }, 150);
+            }
         }
     }
 }
@@ -133,12 +155,34 @@ function Player(x, y) {
 // }
 
 function Collision() {
-
+    this.contact = function(alien1X, alien1Y, alien2X, alien2Y, alien3X, alien3Y, bulletX, bulletY) {
+        let al1 = 0;
+        let al2 = 0;
+        let al3 = 0;
+        if (alien1Y == bulletY) {
+            if (alien1X - 5 <= bulletX && bulletX <= alien1X + 85) {
+                al1++;
+                console.log("trafiony al1 " + al1);
+            }
+        }
+        if (alien2Y == bulletY) {
+            if (alien2X <= bulletX && bulletX <= alien2X + 80) {
+                al2++;
+                console.log("trafiony al2 " + al2);
+            }
+        }
+        if (alien3Y == bulletY) {
+            if (alien3X <= bulletX && bulletX <= alien3X + 80) {
+                al3++;
+                console.log("trafiony al3 " + al3);
+            }
+        }
+    }
 }
 
-var alien1 = new Alien(20, 50, 30);
-var alien2 = new Alien(20, 100, 20);
-var alien3 = new Alien(20, 150, 10);
+var alien1 = new Alien(20, 50, 60);
+var alien2 = new Alien(20, 100, 30);
+var alien3 = new Alien(20, 150, 20);
 alien1.moveAlienHor();
 alien1.moveAlienDown();
 alien2.moveAlienHor();
@@ -150,16 +194,4 @@ var player = new Player(can.width / 2 - 50, can.height - 85);
 player.start();
 document.getElementById("can").addEventListener("keydown", player.moveTank);
 document.onkeydown = player.moveTank;
-
-setInterval(function() {
-
-    console.log("ax1 " + alien1.alienX());
-    console.log("ay1 " + alien1.alienY());
-
-    // console.log("ax2 " + alien2.alienX());
-    // console.log("ax3 " + alien3.alienX());
-
-    console.log("bullet X " + bulletX);
-    console.log("bullet Y " + bulletY);
-
-}, 50)
+var col = new Collision();
