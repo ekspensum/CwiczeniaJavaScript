@@ -103,10 +103,9 @@ function Player(x, y) {
         let bulletInval;
         let bulletY = can.height - 120;
         let bulletX = x + 50;
-
         if (k == "Control") {
-            counter++;
-            if (counter == 1) {
+            if (counter == 0) {
+                counter++;
                 bulletInval = setInterval(function() {
                     bulletY = bulletY - 5;
                     bullet.fillStyle = "red";
@@ -120,25 +119,10 @@ function Player(x, y) {
                         clearInterval(bulletInval);
                         bullet.clearRect(bulletX - 10, bulletY - 10, 20, 20);
                     }
-                }, 20);
-            } else if (counter == 2) {
+                }, 10);
                 setTimeout(function() {
-                    bulletInval = setInterval(function() {
-                        bulletY = bulletY - 5;
-                        bullet.fillStyle = "red";
-                        bullet.beginPath();
-                        bullet.clearRect(bulletX - 10, bulletY, 20, 20);
-                        bullet.arc(bulletX, bulletY, 9, 0, 2 * Math.PI);
-                        bullet.stroke();
-                        bullet.fill();
-                        col.contact(alien1.alienX(), alien1.alienY(), alien2.alienX(), alien2.alienY(), alien3.alienX(), alien3.alienY(), bulletX, bulletY);
-                        if (bulletY <= 20) {
-                            clearInterval(bulletInval);
-                            bullet.clearRect(bulletX - 10, bulletY - 10, 20, 20);
-                        }
-                    }, 20);
                     counter = 0;
-                }, 150);
+                }, 500);
             }
         }
     }
@@ -162,19 +146,20 @@ function Collision() {
         if (alien1Y == bulletY) {
             if (alien1X - 5 <= bulletX && bulletX <= alien1X + 85) {
                 al1++;
-                console.log("trafiony al1 " + al1);
+                document.getElementById("al1").innerHTML = al1;
             }
         }
         if (alien2Y == bulletY) {
             if (alien2X <= bulletX && bulletX <= alien2X + 80) {
                 al2++;
-                console.log("trafiony al2 " + al2);
+                document.getElementById("al2").innerHTML = al2;
             }
         }
         if (alien3Y == bulletY) {
             if (alien3X <= bulletX && bulletX <= alien3X + 80) {
                 al3++;
-                console.log("trafiony al3 " + al3);
+                document.getElementById("al3").innerHTML = al3;
+                console.log(al3);
             }
         }
     }
@@ -183,10 +168,10 @@ function Collision() {
 var alien1 = new Alien(20, 50, 60);
 var alien2 = new Alien(20, 100, 30);
 var alien3 = new Alien(20, 150, 20);
-alien1.moveAlienHor();
-alien1.moveAlienDown();
-alien2.moveAlienHor();
-alien2.moveAlienDown();
+// alien1.moveAlienHor();
+// alien1.moveAlienDown();
+// alien2.moveAlienHor();
+// alien2.moveAlienDown();
 alien3.moveAlienHor();
 alien3.moveAlienDown();
 
