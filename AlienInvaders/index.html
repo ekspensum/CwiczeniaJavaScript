@@ -22,9 +22,9 @@
         <label id="labTot" for="total">Wynik razem:</label>
         <input id="total" name="totalScore" type="text" readonly/>
         <label id="labLogin" for="login">Login:</label>
-        <input id="login" name="login" type="text" />
+        <input id="login" name="login" type="text" value="<?php if(isset($_POST['login'])) echo $_POST['login']; ?>" />
         <label id="labPass" for="pass">Hasło:</label>
-        <input id="pass" name="password" type="password" />
+        <input id="pass" name="password" type="password" value="<?php echo $_POST['password']; ?>" />
         <input id="sub" type="submit" value="Dodaj wynik do bazy" />
     </form>
 
