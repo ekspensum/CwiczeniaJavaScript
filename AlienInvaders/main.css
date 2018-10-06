@@ -1,11 +1,55 @@
 body {
-    background-color: gray;
+    background-color: rgb(57, 107, 65);
 }
 
 #al1,
 #al2,
 #al3 {
     width: 80px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#al1 {
+    position: absolute;
+    top: 10px;
+    left: 126px;
+}
+
+#lab1 {
+    position: absolute;
+    top: 13px;
+    left: 66px;
+}
+
+#al2 {
+    position: absolute;
+    top: 10px;
+    left: 459px;
+}
+
+#lab2 {
+    position: absolute;
+    top: 13px;
+    left: 399px;
+}
+
+#al3 {
+    position: absolute;
+    top: 10px;
+    left: 792px;
+}
+
+#lab3 {
+    position: absolute;
+    top: 13px;
+    left: 732px;
+}
+
+label {
+    font-size: 16px;
+    font-weight: bold;
 }
 
 input {
@@ -13,22 +57,60 @@ input {
     border-radius: 12px;
 }
 
-#sub {
+#sub,
+#button {
     background-color: aquamarine;
     text-decoration-color: darkgreen;
+    font-weight: bold;
     position: absolute;
-    top: 70px;
-    left: 1100px;
+    top: 100px;
+    left: 1120px;
+    height: 26px;
+}
+
+#button {
+    top: 200px;
+    width: 150px;
+    background-color: rgb(75, 73, 187);
+    border-radius: 12px;
+}
+
+#total {
+    position: absolute;
+    top: 10px;
+    left: 1120px;
+    text-align: center;
+    /* font-size: 14px; */
+    font-weight: bold;
+    width: 140px;
+}
+
+#labTot {
+    position: absolute;
+    top: 10px;
+    left: 1018px;
 }
 
 #login {
     position: absolute;
-    top: 10px;
-    left: 1100px;
+    top: 40px;
+    left: 1120px;
+}
+
+#labLogin {
+    position: absolute;
+    top: 40px;
+    left: 1070px;
 }
 
 #pass {
     position: absolute;
-    top: 40px;
-    left: 1100px;
+    top: 70px;
+    left: 1120px;
+}
+
+#labPass {
+    position: absolute;
+    top: 70px;
+    left: 1070px;
 }

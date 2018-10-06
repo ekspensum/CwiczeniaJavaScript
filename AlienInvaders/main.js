@@ -41,7 +41,6 @@ function Alien(x, y, i_val) {
             if (i == areaAlien / 5)
                 i = 0;
             this.alienX = x;
-            // this.alienY = y;
         }, i_val);
     }
     this.moveAlienDown = function() {
@@ -138,45 +137,65 @@ function Player(x, y) {
 //     setTimeout("moveAlienDown()", ival)
 // }
 
+
 function Collision() {
+    var al1 = 0;
+    var al2 = 0;
+    var al3 = 0;
+    document.getElementById("al1").value = al1;
+    document.getElementById("al2").value = al2;
+    document.getElementById("al3").value = al3;
+    document.getElementById("total").value = 0;
     this.contact = function(alien1X, alien1Y, alien2X, alien2Y, alien3X, alien3Y, bulletX, bulletY) {
-        let al1 = 0;
-        let al2 = 0;
-        let al3 = 0;
+
         if (alien1Y == bulletY) {
             if (alien1X - 5 <= bulletX && bulletX <= alien1X + 85) {
                 al1++;
-                document.getElementById("al1").innerHTML = al1;
+                document.getElementById("al1").value = al1;
+                document.getElementById("total").value = al1 + al2 + al3;
             }
         }
         if (alien2Y == bulletY) {
-            if (alien2X <= bulletX && bulletX <= alien2X + 80) {
-                al2++;
-                document.getElementById("al2").innerHTML = al2;
+            if (alien2X - 5 <= bulletX && bulletX <= alien2X + 85) {
+                al2 = al2 + 2;
+                document.getElementById("al2").value = al2;
+                document.getElementById("total").value = al1 + al2 + al3;
             }
         }
         if (alien3Y == bulletY) {
-            if (alien3X <= bulletX && bulletX <= alien3X + 80) {
-                al3++;
-                document.getElementById("al3").innerHTML = al3;
-                console.log(al3);
+            if (alien3X - 5 <= bulletX && bulletX <= alien3X + 85) {
+                al3 = al3 + 3;
+                document.getElementById("al3").value = al3;
+                document.getElementById("total").value = al1 + al2 + al3;
             }
         }
     }
 }
 
-var alien1 = new Alien(20, 50, 60);
-var alien2 = new Alien(20, 100, 30);
-var alien3 = new Alien(20, 150, 20);
-// alien1.moveAlienHor();
-// alien1.moveAlienDown();
-// alien2.moveAlienHor();
-// alien2.moveAlienDown();
-alien3.moveAlienHor();
-alien3.moveAlienDown();
+var alien1 = null;
+var alien2 = null;
+var alien3 = null;
+var player = null;
+var col = null;
 
-var player = new Player(can.width / 2 - 50, can.height - 85);
-player.start();
-document.getElementById("can").addEventListener("keydown", player.moveTank);
-document.onkeydown = player.moveTank;
-var col = new Collision();
+function startGame() {
+
+    if (alien1 == null) {
+        alien1 = new Alien(20, 25, 60);
+        alien2 = new Alien(20, 75, 30);
+        alien3 = new Alien(20, 125, 20);
+        alien1.moveAlienHor();
+        alien1.moveAlienDown();
+        alien2.moveAlienDown();
+        alien2.moveAlienHor();
+        alien3.moveAlienHor();
+        alien3.moveAlienDown();
+        player = new Player(can.width / 2 - 50, can.height - 85);
+        player.start();
+        document.getElementById("can").addEventListener("keydown", player.moveTank);
+        document.onkeydown = player.moveTank;
+        col = new Collision();
+        document.getElementById("button").innerHTML = "Zatrzymaj grę";
+    } else
+        document.location.reload();
+}
