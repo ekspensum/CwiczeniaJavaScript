@@ -58,6 +58,7 @@ function Alien(x, y, i_val) {
                     ctx.clearRect(x, y - 5, 80, 50);
                     this.alienY = y;
                 } else {
+                    // obcy zwiększa skok 2x (tj. o 5px)
                     y = y + 10;
                     ctx.clearRect(x, y - 10, 80, 50);
                     this.alienY = y;
@@ -137,7 +138,6 @@ function Player(x, y) {
 //     setTimeout("moveAlienDown()", ival)
 // }
 
-
 function Collision() {
     var al1 = 0;
     var al2 = 0;
@@ -196,6 +196,8 @@ function startGame() {
         document.onkeydown = player.moveTank;
         col = new Collision();
         document.getElementById("button").innerHTML = "Zatrzymaj grę";
-    } else
+    } else{
         document.location.reload();
+    }
+        
 }

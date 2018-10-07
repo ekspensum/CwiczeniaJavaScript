@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style> 
+
+  
+.replaced {
+
+	visibility: hidden;
+
+  
+}
+
+.replaced:after {
+  width: 100px;
+  height: 50px;
+  
+  
+	visibility: visible;
+	position: absolute;
+	top: 0;
+	left: 0;
+	content: "0%";
+  animation-name: example;
+animation-duration: 30s;
+  animation-iteration-count: infinite;
+}
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes example {
+0% {background-color: red; width: 100px; content:"links";   }
+50% {background-color: yellow; width: 200px; content:"links";}
+100% {background-color: yellow; width: 200px; content:"links";} 
+
+}
+
+/* Standard syntax */
+@keyframes example {
+0% {background-color: #ff9980; width:1px;  height: 1px; content:"0%";  border-radius: 1px;  }
+10% {background-color: #ff8566; width: 100px; height: 100px; content:"10%"; border-radius: 100%;}
+20% {background-color: #ff704d; width: 200px; height: 200px; content:"20%"; border-radius: 100%;} 
+30% {background-color: #ffb366; width: 300px; height: 300px; content:"30%"; border-radius: 100%;}
+40% {background-color: #99ffbb; width: 400px; height: 400px; content:"40%"; border-radius: 100%;}
+50% {background-color: #ffa64d; width: 500px; height: 500px; content:"50%"; border-radius: 100%;}
+60% {background-color: #ff9933; width: 600px; height: 600px; content:"60%"; border-radius: 100%;} 
+70% {background-color: #00ff55; width: 700px; height: 700px; content:"70%"; border-radius: 100%;} 
+80% {background-color: #00e64d; width: 800px; height: 800px; content:"80%"; border-radius: 100%;} 
+90% {background-color: #00cc44; width: 900px; height: 900px; content:"90%"; border-radius: 100%;} 
+100% {background-color: #00b33c; width: 1000px; content:"100%";} 
+  
+  visibility: visible;
+	position: absolute;
+	top: 0;
+	left: 0;
+
+}
+#div1 { 
+    position: absolute; 
+    top: 300;
+}
+</style>
+  
+ <script>
+   function test() {
+   var element = document.getElementById("div1");
+    element.className = "replaced";
+   // alert("klick");
+      compute();
+}
+   
+   function compute(){
+    var text = "";
+    var textb = "";
+    var text2 = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var element = document.getElementById("div2");
+    var element2 = document.getElementById("div3"); 
+  
+      
+     (function loop(i) {          
+   setTimeout(function () {   
+        //   element.innerHTML="<style>#div1{ position: absolute; top: 300;}</style>";
+          element2.innerHTML="dd";
+      	textb ="SYSTEM INFO "+i+" :: - ";
+     		text=textb;
+     		text2=textb;
+        for (j = 0; j <60 ; j++) { 
+        //  text += cars[j] + "<br>";
+          
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+        text2 += possible.charAt(Math.floor(Math.random() * possible.length));
+           element.innerHTML=text;
+          element2.innerHTML=text2;
+          document.getElementById('div1').style.height = j*10 + 'px';
+        //   document.getElementById('div2').style.height = j*10 + 'px';
+        }
+
+      if (--i) loop(i); // iteration counter
+   }, 10) // delay
+})(10000); 
+				
+   
+   }
+  </script> 
+</head>
+<body>
+
+
+  <div id="div1" class="none">0%</div>
+  <br>
+  <br>
+  <hr>
+  <div id="div2" class="none"></div>
+   <div id="div3" class="none"></div>
+   <br><hr>
+  <button onclick="test()">Count Crazy Stuff</button>
+</body>
+</html>
