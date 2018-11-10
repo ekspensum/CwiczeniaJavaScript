@@ -57,32 +57,59 @@ input {
     border-radius: 12px;
 }
 
-#sub,
-#button {
+#buttonLogIn,
+#buttonAddUser,
+#buttonAddScore,
+#buttonStart,
+#buttonLogOut {
     background-color: aquamarine;
-    /* text-decoration-color: darkgreen; */
     font-weight: bold;
-    position: absolute;
-    top: 100px;
-    left: 1120px;
+    width: 150px;
     height: 26px;
+    border-radius: 12px;
+    /* text-decoration-color: darkgreen; */
 }
 
-#button {
+#buttonLogIn {
+    position: absolute;
+    top: 120px;
+    left: 1120px;
+}
+
+#buttonAddUser {
+    position: absolute;
+    top: 160px;
+    left: 1120px;
+}
+
+#buttonAddScore {
+    position: absolute;
     top: 200px;
-    width: 150px;
+    left: 1120px;
+}
+
+#buttonStart {
+    position: absolute;
+    top: 240px;
+    left: 1120px;
     background-color: rgb(75, 73, 187);
-    border-radius: 12px;
+}
+
+#buttonLogOut {
+    position: absolute;
+    top: 10px;
+    left: 1300px;
+    background-color: rgb(187, 119, 73);
 }
 
 #total {
+    width: 147px;
     position: absolute;
     top: 10px;
     left: 1120px;
     text-align: center;
     /* font-size: 14px; */
     font-weight: bold;
-    width: 140px;
 }
 
 #labTot {
@@ -114,20 +141,42 @@ input {
     top: 70px;
     left: 1070px;
 }
-table {
+
+#labelTableUser {
+    position: absolute;
+    top: 575px;
+    left: 1120px;
+}
+
+#tableUser {
+    position: absolute;
+    top: 600px;
+    left: 1120px;
+}
+
+#labelTableAllUsers {
+    position: absolute;
+    top: 275px;
+    left: 1120px;
+}
+
+#tableAllUsers {
     position: absolute;
     top: 300px;
     left: 1120px;
 }
-table, th, td {
-       border: 2px solid black; 
-       border-collapse: collapse;
+
+table,
+th,
+td {
+    border: 2px solid black;
+    border-collapse: collapse;
 }
+
 #komunikat {
     position: absolute;
-    top: 140px;
-    left: 1120px;
-    font-size: 18px;
-    text-decoration-color:blue;
-
+    top: 115px;
+    left: 1300px;
+    font-size: 16px;
+    text-decoration-color: blue;
 }
