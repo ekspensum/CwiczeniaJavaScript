@@ -49,8 +49,14 @@
                         }                   
                     } else
                         echo '<b id="komunikat">Proszę o zalogowanie się.</b>';                    
-                } else
-                    echo '<b id="komunikat">Brak punktacji.</b>';   
+                } else {
+                    echo '<b id="komunikat">Brak punktacji.</b>';
+                    if(isset($_SESSION['login'])) {
+                        $login = $_SESSION['login'];
+                        showUserTable($login, $conn);
+                    }
+                }
+                     
             }
 
         } else
@@ -81,20 +87,23 @@
         <label id="labLogin" for="login">Login:</label>
         <input id="login" name="login" type="text" value="<?php if(isset($_POST['login'])) echo $_POST['login']; ?>" />
         <label id="labPass" for="pass">Hasło:</label>
-        <input id="pass" name="password" type="password" value="<?php echo $_POST['password']; ?>" />
+        <input id="pass" name="password" type="password" value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>" />
         
         <label id="lab1" for="al1">Obcy 1:</label>
-        <input id="al1" name="scoreAlien1" type="text" />
+        <input id="al1" name="scoreAlien1" type="text" value="<?php if(isset($_POST['scoreAlien1'])) echo $_POST['scoreAlien1']; ?>" />
         <label id="lab2" for="al2">Obcy 2:</label>
-        <input id="al2" name="scoreAlien2" type="text" />
+        <input id="al2" name="scoreAlien2" type="text" value="<?php if(isset($_POST['scoreAlien2'])) echo $_POST['scoreAlien2']; ?>" />
         <label id="lab3" for="al3">Obcy 3:</label><br/><br/>
-        <input id="al3" name="scoreAlien3" type="text" />
+        <input id="al3" name="scoreAlien3" type="text" value="<?php if(isset($_POST['scoreAlien3'])) echo $_POST['scoreAlien3']; ?>" />
         <label id="labTot" for="total">Wynik razem:</label>
-        <input id="total" name="totalScore" type="text" readonly value="<?php if(isset($_POST['totalScore'])) {if(isset($result)) $result; else $_POST['totalScore'];} ?>" />
+        <input id="total" name="totalScore" type="text" readonly value="<?php if(isset($_POST['totalScore'])) echo $_POST['totalScore']; ?>" />
 
         <input id="buttonLogIn" type="submit" name="logIn" value="Zaloguj" />
         <input id="buttonAddScore" type="submit" name="addScore" value="Dodaj wynik do bazy" />
-        <input id="buttonAddUser" type="submit" name="addUser" value="Dodaj użytkownika" />
+        <input id="buttonAddUser" type="submit" name="addUser" value="Dodaj użytkownika" />        
+    </form>
+    
+    <form action="index.php" method="POST">
         <input id="buttonLogOut" type="submit" name="logOut" value="Wyloguj" />
     </form>
 

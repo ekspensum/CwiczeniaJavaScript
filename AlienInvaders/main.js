@@ -30,39 +30,43 @@ function Alien(x, y, i_val) {
         setInterval(function() {
             i++;
             if (i <= areaAlien / 5 / 2) {
-                x = x + 10;
-                ctx.clearRect(x - 20, y, 80, 50);
-                ctx.drawImage(img, x, y, 80, 50);
+                if (y <= (can.height - 150)) {
+                    x = x + 10;
+                    ctx.clearRect(x - 20, y, 80, 50);
+                    ctx.drawImage(img, x, y, 80, 50);
+                } else
+                    return;
             } else {
-                x = x - 10;
-                ctx.clearRect(x + 20, y, 80, 50);
-                ctx.drawImage(img, x, y, 80, 50);
+                if (y <= (can.height - 150)) {
+                    x = x - 10;
+                    ctx.clearRect(x + 20, y, 80, 50);
+                    ctx.drawImage(img, x, y, 80, 50);
+                } else
+                    return;
             }
             if (i == areaAlien / 5)
                 i = 0;
             this.alienX = x;
         }, i_val);
+
     }
     this.moveAlienDown = function() {
         setInterval(function() {
-            if (y >= (can.height - 120)) {
-                ctx.textAlign = "center";
-                ctx.font = "35px Arial";
-                ctx.fillStyle = "red";
-                ctx.fillText("Game Over !", can.width / 2, 100);
-                this.alienY = y;
-                return;
-            } else {
-                if (y < can.height * 0.5) {
+            if (y < can.height * 0.5) {
+                if (y <= (can.height - 150)) {
                     y = y + 5;
                     ctx.clearRect(x, y - 5, 80, 50);
                     this.alienY = y;
-                } else {
-                    // obcy zwiększa skok 2x (tj. o 5px)
+                } else
+                    return;
+            } else {
+                // obcy zwiększa skok 2x (tj. o 5px)
+                if (y <= (can.height - 150)) {
                     y = y + 10;
                     ctx.clearRect(x, y - 10, 80, 50);
                     this.alienY = y;
-                }
+                } else
+                    return;
             }
         }, 1500);
     }
@@ -87,7 +91,7 @@ function Player(x, y) {
         if (k == "ArrowRight") {
             x = x + 20;
             if (x <= can.width - 105) {
-                tank.clearRect(x - 20, y, 100, 75);
+                tank.clearRect(x - 19, y, 100, 75);
                 tank.drawImage(img, x, y, 100, 75);
             } else
                 x = can.width - 105;
@@ -101,7 +105,7 @@ function Player(x, y) {
                 x = 0;
         }
         let bulletInval;
-        let bulletY = can.height - 120;
+        let bulletY = can.height - 150;
         let bulletX = x + 50;
         if (k == "Control") {
             if (counter == 0) {
@@ -186,6 +190,7 @@ function startGame() {
         alien3 = new Alien(20, 125, 20);
         alien1.moveAlienHor();
         alien1.moveAlienDown();
+
         alien2.moveAlienDown();
         alien2.moveAlienHor();
         alien3.moveAlienHor();
@@ -195,9 +200,8 @@ function startGame() {
         document.getElementById("can").addEventListener("keydown", player.moveTank);
         document.onkeydown = player.moveTank;
         col = new Collision();
-        document.getElementById("button").innerHTML = "Zatrzymaj grę";
-    } else{
+        document.getElementById("buttonStart").innerHTML = "Zakończ grę";
+    } else {
         document.location.reload();
     }
-        
 }

@@ -144,13 +144,13 @@ input {
 
 #labelTableUser {
     position: absolute;
-    top: 575px;
+    top: 595px;
     left: 1120px;
 }
 
 #tableUser {
     position: absolute;
-    top: 600px;
+    top: 620px;
     left: 1120px;
 }
 
@@ -162,7 +162,7 @@ input {
 
 #tableAllUsers {
     position: absolute;
-    top: 300px;
+    top: 315px;
     left: 1120px;
 }
 
